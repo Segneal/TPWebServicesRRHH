@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    image: mysql:5.7
+    restart: always
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile.front
+    restart: always
+    container_name: front
+    ports:
+      - "5500:80"
+    depends_on:
+      - db
+
+  reportes:
+    build:
+      context: .
+      dockerfile: Dockerfile.reportes
+    restart: always
+    container_name: reportes
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  administrador:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+    restart: always
+    container_name: admin
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+
+  docente:
+    build:
+      context: .
+      dockerfile: Dockerfile.docente
+    restart: always
+    container_name: docente
+    ports:
+      - "8083:8083"
+    depends_on:
+      - db
+
+  estudiante:
+    build:
+      context: .
+      dockerfile: Dockerfile.estudiante
+    restart: always
+    container_name: estudiante
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db
