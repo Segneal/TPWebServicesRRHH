@@ -1,21 +1,21 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();
-const jsonParser = bodyParser.json();
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 PORT = process.env.PORT || 3000;
 
 //middleware
-app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 //routes
-const testRouter = require("./routes/testRouter.js");
-app.use("/api", testRouter);
+const usuarioRouter = require("./routes/usuarioRouter.js");
+const candidatoRouter = require("./routes/candidatoRouter.js");
+
+app.use("/usuario", usuarioRouter);
+app.use("/candidato", candidatoRouter);
+
 //test
 app.get("/", (req, res) => {
   res.send("Hello World!");

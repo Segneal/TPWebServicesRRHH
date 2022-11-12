@@ -28,8 +28,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.test = require("./testModel.js")(sequelize, Sequelize);
-//db.usuarios = require("./usuariosModel.js")(sequelize, Sequelize);
+db.usuarios = require("./usuarioModel.js")(sequelize, DataTypes);
+db.notaFinal = require("./notaFinalModel.js")(sequelize, DataTypes);
+db.materias = require("./materiasModel.js")(sequelize, DataTypes);
+db.candidato = require("./candidatoModel.js")(sequelize, DataTypes);
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and re-sync db.");
