@@ -56,7 +56,7 @@ async function validarUsuario() {
               window.location.replace("./Docente/homeDocente.html");
             }
             if (json.rol == "ROLE_RRHH") {
-              window.location.href = "http://localhost:3000";
+              window.location.href = "http://127.0.0.1:5173/";
             }
           }
         }
