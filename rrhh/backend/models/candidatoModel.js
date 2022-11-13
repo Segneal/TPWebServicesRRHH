@@ -1,5 +1,6 @@
 const db = require("../models");
 const Candidato = db.candidato;
+const Usuario = db.usuario;
 
 module.exports = (sequelize, DataTypes) => {
   const Candidato = sequelize.define("candidato", {
@@ -11,12 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     estado: {
       type: DataTypes.STRING,
     },
-    usuarioId: {
+    idUsuario: {
       type: DataTypes.BIGINT,
-      references: {
-        model: "usuarios",
-        key: "id",
-      },
     },
   });
 

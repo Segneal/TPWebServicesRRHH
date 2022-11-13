@@ -33,6 +33,15 @@ db.notaFinal = require("./notaFinalModel.js")(sequelize, DataTypes);
 db.materias = require("./materiasModel.js")(sequelize, DataTypes);
 db.candidato = require("./candidatoModel.js")(sequelize, DataTypes);
 
+db.usuarios.hasMany(db.notaFinal, {
+  foreignKey: "usuario_id",
+  as: "notasFinales",
+});
+
+db.candidato.belongsTo(db.usuarios, {
+  foreignKey: "idUsuario",
+});
+
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and re-sync db.");
 });
