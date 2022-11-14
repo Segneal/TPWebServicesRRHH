@@ -91,11 +91,19 @@ body {
 }
 .footer {
   height: 150px;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 225px);
   display: flex;
   text-align: center;
   background-color: #ffffff;
   justify-content: center;
 }
+
+.footer h1 {
+  padding-top: 3rem;
+}
+
 .tabla-alumnos {
   min-height: 400px;
 }
@@ -117,18 +125,39 @@ body {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   margin-left: auto;
+  top: 4rem;
+  right: 3rem;
   width: 100px;
-  background-color: white;
+  height: 50px;
+  background-color: rgb(212, 208, 208);
+  transition: all 0.5s;
+  user-select: none;
+  cursor: pointer;
+}
+
+.boton-salida:hover {
+  background-color: black;
+  color: white;
+}
+
+.boton-header {
+  padding-top: 1rem;
+  margin-left: auto;
+  margin-right: 1rem;
+  width: 100px;
+  background-color: rgb(212, 208, 208);
   height: 50px;
   transition: all 0.5s;
-  border-left: 1px solid black;
   user-select: none;
   cursor: pointer;
   right: 0;
   top: 5rem;
+  border-radius: 3px;
 }
 
-.boton-salida:hover {
+.boton-header:hover {
+  background-color: black;
+  color: white;
 }
 
 .table-row-selector {
