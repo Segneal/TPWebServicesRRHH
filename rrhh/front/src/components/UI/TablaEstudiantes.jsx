@@ -7,12 +7,19 @@ import {
   Td,
   Tbody,
   useDisclosure,
+  Select,
+  Input,
+  Text,
+  HStack,
 } from "@chakra-ui/react";
 import EstudianteModal from "./EstudianteModal";
 
 export default function TablaEstudiantes({ estudiantes }) {
   const [estudiante, setEstudiante] = React.useState(null);
+  const [estudiantesFiltrados, setEstudiantesFiltrados] =
+    React.useState(estudiantes);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [filtro, setFiltro] = React.useState("");
 
   const selectRow = (estudiante) => {
     onOpen();
@@ -23,11 +30,39 @@ export default function TablaEstudiantes({ estudiantes }) {
     setEstudiante(null);
   };
 
+  const handleInputChange = (e) => {
+    setFiltro(e.target.value);
+  };
+
+  const mostrarTablaEstudiantes = () => {
+    return estudiantesFiltrados?.map((estudiante) => (
+      <Tr
+        key={estudiante.id}
+        className="table-row-selector"
+        onClick={() => selectRow(estudiante)}
+      >
+        <Td>{estudiante.nombre.toUpperCase()} </Td>
+        <Td>{estudiante.apellido.toUpperCase()}</Td>
+        <Td>{estudiante.carrera}</Td>
+        <Td>{estudiante.promedio}</Td>
+        <Td>{estudiante.porcentajeDeCarrera}%</Td>
+      </Tr>
+    ));
+  };
+
   return (
     <section>
       <div className="estudiantes-title">
         <h1>Estudiantes</h1>
       </div>
+      <HStack>
+        <Text w="150px">Filtros</Text>
+        <Select>
+          <option value="promedio">Promedio</option>
+          <option value="carrera">Carrera</option>
+        </Select>
+        <Input value={filtro} onChange={handleInputChange}></Input>
+      </HStack>
       <TableContainer>
         <Table variant="simple">
           <Thead>
@@ -39,21 +74,7 @@ export default function TablaEstudiantes({ estudiantes }) {
               <Td>Porcentaje de materias</Td>
             </Tr>
           </Thead>
-          <Tbody>
-            {estudiantes?.map((estudiante) => (
-              <Tr
-                key={estudiante.id}
-                className="table-row-selector"
-                onClick={() => selectRow(estudiante)}
-              >
-                <Td>{estudiante.nombre.toUpperCase()} </Td>
-                <Td>{estudiante.apellido.toUpperCase()}</Td>
-                <Td>{estudiante.carrera}</Td>
-                <Td>{estudiante.promedio}</Td>
-                <Td>{estudiante.porcentajeDeCarrera}%</Td>
-              </Tr>
-            ))}
-          </Tbody>
+          <Tbody>{mostrarTablaEstudiantes()}</Tbody>
         </Table>
       </TableContainer>
       <EstudianteModal

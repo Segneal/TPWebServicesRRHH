@@ -39,7 +39,6 @@ export default function EstudianteModal(props) {
           <ModalCloseButton />
           <ModalBody>
             <Box p="2rem">
-              <Text>id:{estudiante?.id} </Text>
               <Text>
                 Nombre y Apellido {estudiante?.nombre.toUpperCase()}{" "}
                 {estudiante?.apellido.toUpperCase()}

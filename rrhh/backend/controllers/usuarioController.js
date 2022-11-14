@@ -59,9 +59,9 @@ const getAllUsuarios = async (req, res) => {
   );
 
   //filter out users with promedio <7 and porcentajeDeCarrera < 66
-  //newUsuarios = newUsuarios.filter((usuario) => {
-  // return usuario.promedio >= 7 && usuario.porcentajeDeCarrera >= 60;
-  //});
+  newUsuarios = newUsuarios.filter((usuario) => {
+    return usuario.porcentajeDeCarrera >= 60;
+  });
 
   res.status(200).send(newUsuarios);
 };
