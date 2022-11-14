@@ -7,10 +7,10 @@ import {
   Td,
   Tbody,
   useDisclosure,
-  Select,
   Input,
   Text,
   HStack,
+  VStack,
 } from "@chakra-ui/react";
 import EstudianteModal from "./EstudianteModal";
 
@@ -20,6 +20,7 @@ export default function TablaEstudiantes({ estudiantes }) {
     React.useState(estudiantes);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [filtro, setFiltro] = React.useState("");
+  const [filtroPromedio, setFiltroPromedio] = React.useState(0);
 
   const selectRow = (estudiante) => {
     onOpen();
@@ -30,10 +31,43 @@ export default function TablaEstudiantes({ estudiantes }) {
     setEstudiante(null);
   };
 
-  const handleInputChange = (e) => {
+  const handleFiltroChange = (e) => {
+    console.log(filtro);
     setFiltro(e.target.value);
   };
 
+  const handleFiltroPromedioChange = (e) => {
+    setFiltroPromedio(e.target.value);
+  };
+
+  //estudiantes contiene carrera
+  const filtrarPorCarrera = (estudiantesAFiltrar) => {
+    if (filtro === "") {
+      return estudiantesAFiltrar;
+    }
+    return estudiantesAFiltrar.filter((estudiante) => {
+      //contiene carrera
+      return estudiante.carrera.toLowerCase().includes(filtro.toLowerCase());
+    });
+  };
+
+  const filtrarPorPromedio = (estudiantesAFiltrar) => {
+    console.log(estudiantesAFiltrar);
+    if (filtroPromedio === 0) {
+      return estudiantesAFiltrar;
+    }
+    return estudiantesAFiltrar.filter((estudnt) => {
+      return estudnt.promedio >= filtroPromedio;
+    });
+  };
+
+  React.useEffect(() => {
+    let filtrados = filtrarPorCarrera(estudiantes);
+    filtrados = filtrarPorPromedio(filtrados);
+    setEstudiantesFiltrados(filtrados);
+  }, [filtro, filtroPromedio, estudiantes]);
+
+  ///VISTA
   const mostrarTablaEstudiantes = () => {
     return estudiantesFiltrados?.map((estudiante) => (
       <Tr
@@ -51,18 +85,30 @@ export default function TablaEstudiantes({ estudiantes }) {
   };
 
   return (
-    <section>
+    <section className="tabla-body">
       <div className="estudiantes-title">
         <h1>Estudiantes</h1>
       </div>
-      <HStack>
-        <Text w="150px">Filtros</Text>
-        <Select>
-          <option value="promedio">Promedio</option>
-          <option value="carrera">Carrera</option>
-        </Select>
-        <Input value={filtro} onChange={handleInputChange}></Input>
-      </HStack>
+      <VStack>
+        <Text w="150px">Buscar</Text>
+        <HStack>
+          <Text w="150px">Carrera</Text>
+          <Input name="filtro" value={filtro} onChange={handleFiltroChange} />
+        </HStack>
+        <HStack>
+          <Text w="150px">Promedio</Text>
+          <Input
+            name="filtroPromedio"
+            type="number"
+            value={filtroPromedio}
+            onKeyDown={(evt) =>
+              //prevent float values
+              (evt.key === "." || evt.key === ",") && evt.preventDefault()
+            }
+            onChange={handleFiltroPromedioChange}
+          />
+        </HStack>
+      </VStack>
       <TableContainer>
         <Table variant="simple">
           <Thead>

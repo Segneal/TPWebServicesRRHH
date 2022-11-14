@@ -42,8 +42,9 @@ const getAllUsuarios = async (req, res) => {
           carrera: usuario.carrera,
         },
       });
-      let porcentajeDeCarrera =
-        (notasFinales.length * 100) / cantidadDeMaterias;
+      let porcentajeDeCarrera = Math.round(
+        (notasFinales.length * 100) / cantidadDeMaterias
+      );
 
       let user = {
         id: usuario.id,

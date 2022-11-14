@@ -1,15 +1,15 @@
 import React from "react";
-import { useQuery } from "react-query";
 import { getAllCandidatos } from "../../api/api.js";
+import { useQuery } from "react-query";
 import TablaCandidatos from "../UI/TablaCandidatos";
+import useCandidatos from "../../api/useCandidatos.js";
 
 export default function BusquedaCandidatos() {
-  const { data, error, loading } = useQuery("candidatos", getAllCandidatos, {
-    refetchOnWindowFocus: false,
-  });
+  const { candidatos, error, loading } = useCandidatos();
 
+  console.log(candidatos);
   const mostrarCandidatos = () => {
-    return <TablaCandidatos candidatos={data} />;
+    return <TablaCandidatos candidatos={candidatos} />;
   };
 
   return loading ? (

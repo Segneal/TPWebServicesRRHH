@@ -4,6 +4,7 @@ import Header from "./components/UI/Header";
 import SideBar from "./components/UI/SideBar";
 import BusquedaAlumnos from "./components/Routes/BusquedaAlumnos";
 import BusquedaCandidatos from "./components/Routes/BusquedaCandidatos";
+import Footer from "./components/UI/Footer";
 
 function App() {
   return (
@@ -13,12 +14,10 @@ function App() {
         <div className="column">
           <Header />
           <Routes>
-            <Route path="/busquedaAlumnos" element={<BusquedaAlumnos />} />
-            <Route
-              path="/busquedaCandidatos"
-              element={<BusquedaCandidatos />}
-            />
+            <Route path="busquedaCandidatos" element={<BusquedaCandidatos />} />
+            <Route path="busquedaAlumnos" element={<BusquedaAlumnos />} />
           </Routes>
+          <Footer />
         </div>
       </Router>
     </div>

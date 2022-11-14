@@ -65,7 +65,7 @@ export default function CandidatoModal(props) {
               >
                 <option value="Contactado">Contactado</option>
                 <option value="En Proceso">En Proceso</option>
-                <option value="Rechazo">Rechazado</option>
+                <option value="Rechazado">Rechazado</option>
                 <option value="Contratado">Contratado</option>
               </Select>
 

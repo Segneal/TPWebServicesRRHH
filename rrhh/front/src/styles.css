@@ -63,6 +63,14 @@ body {
   justify-content: center;
 }
 
+.tabla-alumnos {
+  min-height: 800px;
+}
+
+.tabla-candidatos {
+  min-height: 800px;
+}
+
 .alumnno {
   display: flex;
   justify-content: center;
@@ -94,4 +102,10 @@ body {
 .estudiantes-title {
   width: 100%;
   height: 50px;
+}
+
+.tabla-body {
+  padding: 1rem;
+  padding-bottom: 2rem;
+  /*   background-color: #f8f9fc; */
 }

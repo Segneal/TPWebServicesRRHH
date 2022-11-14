@@ -8,13 +8,20 @@ import {
   Tbody,
   useDisclosure,
   Input,
-  Select,
+  VStack,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import CandidatoModal from "./CandidatoModal";
+import { useEffect } from "react";
+
 export default function TablaCandidatos({ candidatos }) {
   const [candidato, setCandidato] = React.useState(null);
+  const [candidatosFiltrados, setCandidatosFiltrados] =
+    React.useState(candidatos);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [filtro, setFiltro] = React.useState("");
+  const [filtroCarrera, setFiltroCarrera] = React.useState("");
+  const [filtroEstado, setFiltroEstado] = React.useState("");
 
   const selectRow = (candidato) => {
     onOpen();
@@ -25,9 +32,51 @@ export default function TablaCandidatos({ candidatos }) {
     setCandidato(null);
   };
 
+  const handleFiltroChangeCarrera = (e) => {
+    console.log(filtroCarrera);
+    setFiltroCarrera(e.target.value);
+  };
+
+  const handleFiltroChangeEstado = (e) => {
+    console.log(filtroEstado);
+    setFiltroEstado(e.target.value);
+  };
+
+  //estudiantes contiene carrera
+  const filtrarPorCarrera = (candidatosAFiltrar) => {
+    if (filtroCarrera === "") {
+      return candidatosAFiltrar;
+    }
+    //filter candidato that cointains carrera
+    return candidatosAFiltrar.filter((candidato) => {
+      return candidato.usuario.carrera
+        .toLowerCase()
+        .includes(filtroCarrera.toLowerCase());
+    });
+  };
+
+  const filtrarPorEstado = (candidatosAFiltrar) => {
+    if (filtroEstado === "") {
+      return candidatosAFiltrar;
+    }
+    return candidatosAFiltrar?.filter((candidato) => {
+      //contiene carrera
+      return candidato.estado
+        .toLowerCase()
+        .includes(filtroEstado.toLowerCase());
+    });
+  };
+
+  useEffect(() => {
+    let filtrados = filtrarPorCarrera(candidatos);
+    filtrados = filtrarPorEstado(filtrados);
+    setCandidatosFiltrados(filtrados);
+  }, [filtroCarrera, filtroEstado, candidatos]);
+
+  //vista
   const mostrarCandidatos = () => {
     {
-      return candidatos?.map((candidato) => (
+      return candidatosFiltrados?.map((candidato) => (
         <Tr
           key={candidato.id}
           className="table-row-selector"
@@ -47,6 +96,25 @@ export default function TablaCandidatos({ candidatos }) {
       <div className="candidato-title">
         <h1>Candidatos</h1>
       </div>
+      <VStack>
+        <Text w="150px">Buscar</Text>
+        <HStack>
+          <Text w="150px">Carrera</Text>
+          <Input
+            name="filtroCarrera"
+            value={filtroCarrera}
+            onChange={handleFiltroChangeCarrera}
+          />
+        </HStack>
+        <HStack>
+          <Text w="150px">Estado</Text>
+          <Input
+            name="filtroEstado"
+            value={filtroEstado}
+            onChange={handleFiltroChangeEstado}
+          />
+        </HStack>
+      </VStack>
       <TableContainer>
         <Table variant="simple">
           <Thead>
