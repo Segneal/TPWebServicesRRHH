@@ -1,7 +1,7 @@
 import "./styles.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import SideBar from "./components/SideBar";
+import Header from "./components/UI/Header";
+import SideBar from "./components/UI/SideBar";
 import BusquedaAlumnos from "./components/Routes/BusquedaAlumnos";
 import BusquedaCandidatos from "./components/Routes/BusquedaCandidatos";
 

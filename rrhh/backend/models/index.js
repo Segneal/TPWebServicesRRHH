@@ -38,6 +38,10 @@ db.usuarios.hasMany(db.notaFinal, {
   as: "notasFinales",
 });
 
+db.usuarios.hasOne(db.candidato, {
+  foreignKey: "idUsuario",
+});
+
 db.candidato.belongsTo(db.usuarios, {
   foreignKey: "idUsuario",
 });

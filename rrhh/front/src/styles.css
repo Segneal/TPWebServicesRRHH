@@ -80,3 +80,18 @@ body {
 
 .boton-salida:hover {
 }
+
+.table-row-selector {
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.table-row-selector:hover {
+  background-color: #f8f9fc;
+}
+
+.estudiantes-title {
+  width: 100%;
+  height: 50px;
+}

@@ -17,8 +17,8 @@ const getAllCandidatos = async (req, res) => {
 };
 
 const createCandidato = async (req, res) => {
-  console.log(req.body);
   const { idUsuario } = req.body;
+  console.log(idUsuario);
   const candidato = await Candidato.findOne({
     where: {
       idUsuario: idUsuario,
@@ -41,6 +41,8 @@ const updateCandidato = async (req, res) => {
       idUsuario: idUsuario,
     },
   });
+
+  console.log(candidato);
   if (!candidato) {
     return res.status(404).send("El usuario no es candidato");
   }

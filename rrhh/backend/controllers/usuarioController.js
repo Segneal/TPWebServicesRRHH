@@ -4,6 +4,7 @@ const db = require("../models");
 const Usuario = db.usuarios;
 const NotaFinal = db.notaFinal;
 const Materias = db.materias;
+const Candidato = db.candidato;
 
 const getAllUsuarios = async (req, res) => {
   let usuarios = await Usuario.findAll({
@@ -11,6 +12,17 @@ const getAllUsuarios = async (req, res) => {
     where: {
       rol: "ROLE_ESTUDIANTE",
     },
+    include: [
+      {
+        model: Candidato,
+        required: false,
+        attributes: ["idUsuario"],
+      },
+    ],
+  });
+  //filter out candidato from usuarios
+  usuarios = usuarios.filter((usuario) => {
+    return usuario.candidato === null;
   });
 
   let newUsuarios = await Promise.all(
@@ -41,11 +53,15 @@ const getAllUsuarios = async (req, res) => {
         promedio: promedio,
         porcentajeDeCarrera: porcentajeDeCarrera,
       };
+
       return user;
     })
   );
 
-  console.log(newUsuarios);
+  //filter out users with promedio <7 and porcentajeDeCarrera < 66
+  //newUsuarios = newUsuarios.filter((usuario) => {
+  // return usuario.promedio >= 7 && usuario.porcentajeDeCarrera >= 60;
+  //});
 
   res.status(200).send(newUsuarios);
 };

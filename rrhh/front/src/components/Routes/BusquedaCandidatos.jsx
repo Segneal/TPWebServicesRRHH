@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { getAllCandidatos } from "../../api/api";
+import { getAllCandidatos } from "../../api/api.js";
+import TablaCandidatos from "../UI/TablaCandidatos";
 
 export default function BusquedaCandidatos() {
   const { data, error, loading } = useQuery("candidatos", getAllCandidatos, {
@@ -8,16 +9,7 @@ export default function BusquedaCandidatos() {
   });
 
   const mostrarCandidatos = () => {
-    return data?.map((candidato) => {
-      return (
-        <div className="candidato" key={candidato.id}>
-          <p>{candidato.estado}</p>
-          <p>{candidato.usuario.nombre}</p>
-          <p>{candidato.usuario.apellido}</p>
-          <p>{candidato.usuario.carrera} </p>
-        </div>
-      );
-    });
+    return <TablaCandidatos candidatos={data} />;
   };
 
   return loading ? (
