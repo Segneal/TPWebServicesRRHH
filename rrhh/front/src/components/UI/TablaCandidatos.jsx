@@ -121,9 +121,9 @@ export default function TablaCandidatos({ candidatos, fReset }) {
           </Box>
         </HStack>
       </VStack>
-      <TableContainer pt="2rem">
+      <Box mt="3rem">
         <Table variant="striped">
-          <Thead>
+          <Thead position="sticky" top={0} bgColor="gray.200">
             <Tr>
               <Td>Nombre</Td>
               <Td>Apellido</Td>
@@ -133,7 +133,7 @@ export default function TablaCandidatos({ candidatos, fReset }) {
           </Thead>
           <Tbody>{mostrarCandidatos()}</Tbody>
         </Table>
-      </TableContainer>
+      </Box>
       <CandidatoModal
         candidato={candidato}
         isOpen={isOpen}

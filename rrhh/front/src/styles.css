@@ -166,10 +166,6 @@ body {
   transition: all 0.15s ease-in;
 }
 
-.table-row-selector:hover {
-  transform: scale(1.01);
-}
-
 .estudiantes-title {
   width: 100%;
   height: 50px;

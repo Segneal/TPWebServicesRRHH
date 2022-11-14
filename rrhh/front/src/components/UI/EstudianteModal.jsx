@@ -34,11 +34,11 @@ export default function EstudianteModal(props) {
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent h="600px" w="600px">
+        <ModalContent h="350px" w="600px" color="gray.600" gap="1rem">
           <ModalHeader>Estudiante</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box p="2rem">
+            <Box p="2rem" gap="2rem">
               <Text>
                 Nombre y Apellido {estudiante?.nombre.toUpperCase()}{" "}
                 {estudiante?.apellido.toUpperCase()}
@@ -51,31 +51,37 @@ export default function EstudianteModal(props) {
               <Text>
                 Porcentaje de materias: {estudiante?.porcentajeDeCarrera}%
               </Text>
-              <Button onClick={() => onOpenConfirmModal()}>Seleccionar</Button>
+              <Button mt="2rem" onClick={() => onOpenConfirmModal()}>
+                Seleccionar
+              </Button>
               <Modal isOpen={isOpenConfirmModal} onClose={onCloseConfirmModal}>
-                <ModalContent>
+                <ModalContent mt="10rem" h="200px" bgColor="gray.100" w="350px">
                   <ModalHeader>Confirmar seleccion</ModalHeader>
                   <ModalBody>
                     <Text>
                       ¿Está seguro que desea seleccionar este estudiante?
                     </Text>
                   </ModalBody>
-                  <ModalFooter>
-                    <Flex>
-                      <Button onClick={confirmarSeleccion}>Confirmar</Button>
-                      <Button onClick={onCloseConfirmModal}>Cancelar</Button>
-                    </Flex>
-                  </ModalFooter>
+                  <Flex gap="2rem" mb="1rem">
+                    <Button
+                      bgColor="gray.200"
+                      ml="auto"
+                      onClick={confirmarSeleccion}
+                    >
+                      Confirmar
+                    </Button>
+                    <Button
+                      bgColor="gray.200"
+                      mr="auto"
+                      onClick={onCloseConfirmModal}
+                    >
+                      Cancelar
+                    </Button>
+                  </Flex>
                 </ModalContent>
               </Modal>
             </Box>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cerrar
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

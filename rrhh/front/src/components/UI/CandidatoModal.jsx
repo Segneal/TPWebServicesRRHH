@@ -29,7 +29,6 @@ export default function CandidatoModal(props) {
     onClose();
     onCloseConfirmModal();
     updateCandidato(candidato.idUsuario, estadoCandidato);
-
     reset();
   };
 
@@ -47,11 +46,11 @@ export default function CandidatoModal(props) {
     <>
       <Modal size="xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent color="gray.600" gap="1rem">
           <ModalHeader>Candidato</ModalHeader>
           <ModalCloseButton />
           <ModalBody h="500px">
-            <Box p="2rem">
+            <Box p="2rem" gap="2rem">
               <Text>
                 Nombre y Apellido {candidato?.usuario.nombre.toUpperCase()}{" "}
                 {candidato?.usuario.apellido.toUpperCase()}
@@ -63,6 +62,10 @@ export default function CandidatoModal(props) {
                 onChange={handleSelectChange}
                 value={estadoCandidato}
                 placeholder={estadoCandidato}
+                w="300px"
+                ml="auto"
+                mr="auto"
+                mt="1rem"
               >
                 <option value="Contactado">Contactado</option>
                 <option value="En Proceso">En Proceso</option>
@@ -70,31 +73,37 @@ export default function CandidatoModal(props) {
                 <option value="Contratado">Contratado</option>
               </Select>
 
-              <Button onClick={() => onOpenConfirmModal()}>modificar</Button>
+              <Button mt="1rem" onClick={() => onOpenConfirmModal()}>
+                modificar
+              </Button>
               <Modal isOpen={isOpenConfirmModal} onClose={onCloseConfirmModal}>
-                <ModalContent pt="5rem">
+                <ModalContent mt="10rem" bgColor="gray.100" h="150px">
                   <ModalHeader>Confirmar modificacion</ModalHeader>
                   <ModalBody>
                     <Text>
                       ¿Está seguro que desea modificar este candidato?
                     </Text>
                   </ModalBody>
-                  <ModalFooter>
-                    <Flex>
-                      <Button onClick={modificarCandidato}>Confirmar</Button>
-                      <Button onClick={onCloseConfirmModal}>Cancelar</Button>
-                    </Flex>
-                  </ModalFooter>
+                  <Flex gap="2rem" mb="1rem">
+                    <Button
+                      bgColor="gray.200"
+                      ml="auto"
+                      onClick={modificarCandidato}
+                    >
+                      Confirmar
+                    </Button>
+                    <Button
+                      bgColor="gray.200"
+                      mr="auto"
+                      onClick={onCloseConfirmModal}
+                    >
+                      Cancelar
+                    </Button>
+                  </Flex>
                 </ModalContent>
               </Modal>
             </Box>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cerrar
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

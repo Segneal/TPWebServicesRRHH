@@ -88,8 +88,10 @@ export default function TablaEstudiantes({ estudiantes }) {
   return (
     <section className="tabla-body">
       <VStack>
-        <Text w="150px">Buscar</Text>
         <HStack gap="2rem">
+          <Text pt="1rem" w="150px">
+            Buscar
+          </Text>
           <Box>
             <Text w="150px">Carrera</Text>
             <Input name="filtro" value={filtro} onChange={handleFiltroChange} />
@@ -109,9 +111,9 @@ export default function TablaEstudiantes({ estudiantes }) {
           </Box>
         </HStack>
       </VStack>
-      <TableContainer m="1rem">
-        <Table variant="striped">
-          <Thead>
+      <Box overflowY="auto" maxHeight="500px">
+        <Table variant="striped" mt="2rem">
+          <Thead position="sticky" top={0} bgColor="gray.300">
             <Tr>
               <Td>Nombre</Td>
               <Td>Apellido</Td>
@@ -122,7 +124,7 @@ export default function TablaEstudiantes({ estudiantes }) {
           </Thead>
           <Tbody>{mostrarTablaEstudiantes()}</Tbody>
         </Table>
-      </TableContainer>
+      </Box>
       <EstudianteModal
         estudiante={estudiante}
         isOpen={isOpen}
