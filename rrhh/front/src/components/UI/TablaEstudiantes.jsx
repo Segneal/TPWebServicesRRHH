@@ -11,6 +11,7 @@ import {
   Text,
   HStack,
   VStack,
+  Box,
 } from "@chakra-ui/react";
 import EstudianteModal from "./EstudianteModal";
 
@@ -86,31 +87,30 @@ export default function TablaEstudiantes({ estudiantes }) {
 
   return (
     <section className="tabla-body">
-      <div className="estudiantes-title">
-        <h1>Estudiantes</h1>
-      </div>
       <VStack>
         <Text w="150px">Buscar</Text>
-        <HStack>
-          <Text w="150px">Carrera</Text>
-          <Input name="filtro" value={filtro} onChange={handleFiltroChange} />
-        </HStack>
-        <HStack>
-          <Text w="150px">Promedio</Text>
-          <Input
-            name="filtroPromedio"
-            type="number"
-            value={filtroPromedio}
-            onKeyDown={(evt) =>
-              //prevent float values
-              (evt.key === "." || evt.key === ",") && evt.preventDefault()
-            }
-            onChange={handleFiltroPromedioChange}
-          />
+        <HStack gap="2rem">
+          <Box>
+            <Text w="150px">Carrera</Text>
+            <Input name="filtro" value={filtro} onChange={handleFiltroChange} />
+          </Box>
+          <Box>
+            <Text w="150px">Promedio</Text>
+            <Input
+              name="filtroPromedio"
+              type="number"
+              value={filtroPromedio}
+              onKeyDown={(evt) =>
+                //prevent float values
+                (evt.key === "." || evt.key === ",") && evt.preventDefault()
+              }
+              onChange={handleFiltroPromedioChange}
+            />
+          </Box>
         </HStack>
       </VStack>
-      <TableContainer>
-        <Table variant="simple">
+      <TableContainer m="1rem">
+        <Table variant="striped">
           <Thead>
             <Tr>
               <Td>Nombre</Td>

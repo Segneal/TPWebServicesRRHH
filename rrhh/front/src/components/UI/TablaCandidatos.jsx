@@ -11,11 +11,13 @@ import {
   VStack,
   HStack,
   Text,
+  Select,
+  Box,
 } from "@chakra-ui/react";
 import CandidatoModal from "./CandidatoModal";
 import { useEffect } from "react";
 
-export default function TablaCandidatos({ candidatos }) {
+export default function TablaCandidatos({ candidatos, fReset }) {
   const [candidato, setCandidato] = React.useState(null);
   const [candidatosFiltrados, setCandidatosFiltrados] =
     React.useState(candidatos);
@@ -29,6 +31,7 @@ export default function TablaCandidatos({ candidatos }) {
   };
 
   const reset = () => {
+    fReset();
     setCandidato(null);
   };
 
@@ -93,30 +96,33 @@ export default function TablaCandidatos({ candidatos }) {
 
   return (
     <section>
-      <div className="candidato-title">
-        <h1>Candidatos</h1>
-      </div>
       <VStack>
-        <Text w="150px">Buscar</Text>
-        <HStack>
-          <Text w="150px">Carrera</Text>
-          <Input
-            name="filtroCarrera"
-            value={filtroCarrera}
-            onChange={handleFiltroChangeCarrera}
-          />
-        </HStack>
-        <HStack>
-          <Text w="150px">Estado</Text>
-          <Input
-            name="filtroEstado"
-            value={filtroEstado}
-            onChange={handleFiltroChangeEstado}
-          />
+        <HStack gap="2rem" pt="1rem">
+          <Text pt="1rem" pr="5rem">
+            Buscar
+          </Text>
+          <Box>
+            <Text w="150px">Carrera</Text>
+            <Input
+              name="filtroCarrera"
+              value={filtroCarrera}
+              onChange={handleFiltroChangeCarrera}
+            />
+          </Box>
+          <Box>
+            <Text w="150px">Estado</Text>
+            <Select name="filtroEstado" onChange={handleFiltroChangeEstado}>
+              <option value="sin contactar">Sin Contactar</option>
+              <option value="contactado">Contactado</option>
+              <option value="en proceso">En Proceso</option>
+              <option value="rechazado">Rechazado</option>
+              <option value="contratado">Contratado</option>
+            </Select>
+          </Box>
         </HStack>
       </VStack>
-      <TableContainer>
-        <Table variant="simple">
+      <TableContainer pt="2rem">
+        <Table variant="striped">
           <Thead>
             <Tr>
               <Td>Nombre</Td>

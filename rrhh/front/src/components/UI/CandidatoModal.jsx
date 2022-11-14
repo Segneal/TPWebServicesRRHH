@@ -29,6 +29,7 @@ export default function CandidatoModal(props) {
     onClose();
     onCloseConfirmModal();
     updateCandidato(candidato.idUsuario, estadoCandidato);
+
     reset();
   };
 

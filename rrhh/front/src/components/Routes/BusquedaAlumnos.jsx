@@ -3,6 +3,7 @@ import { getAllEstudiantes } from "../../api/api.js";
 import { useQuery } from "react-query";
 import TablaEstudiantes from "../UI/TablaEstudiantes.jsx";
 import useEstudiantes from "../../api/useEstudiantes.js";
+import spinner from "../../assets/spinner.gif";
 
 export default function BusquedaAlumnos() {
   const { estudiantes, error, loading } = useEstudiantes();
@@ -12,7 +13,9 @@ export default function BusquedaAlumnos() {
   };
 
   return loading ? (
-    <div>Cargando...</div>
+    <div className="loader">
+      <img src={spinner} alt="spinner" />
+    </div>
   ) : error ? (
     <div>Error</div>
   ) : (
