@@ -33,3 +33,26 @@ python -m flask run
 ```
 * URL de Swagger: [/api/docs](http://localhost:5000/api/docs)
 * Desde el Swagger podrán ingresar a [/api/docs/swagger.json](http://localhost:5000/api/docs/swagger.json) de donde podrán obtener un .json que podrá ser importado en Postman desde la opción "Raw text" y creará las collections.
+
+
+
+Modulo RRHH:
+Backend
+* Puerto 3000
+
+* Para correr el servicio Backend-rrhh
+```
+cd rrhh/backend
+npm i
+npm nodemon server.js
+```
+* Al correr el servidor se generara las tablas en la base de datos necesitados para el modulo RRHH
+Frontend
+* Puerto 5173
+```
+cd rrhh/front
+npm i
+npm run dev
+```
+
+*Levantara el frontend para el modulo RRHH 
